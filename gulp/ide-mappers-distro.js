@@ -6,7 +6,8 @@ var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 
 var mappersDir = './h_ide/blocks/mappers/**/*.js';
-var jsDest = './libs/dist';
+var jsUnMinDest = './libs/h_ide_dist/unmin';
+var jsMinDest = './libs/h_ide_dist/min';
 
 gulp.task('ide-mappers-packager', function() {
     return gulp.src(mappersDir)
@@ -17,12 +18,12 @@ gulp.task('ide-mappers-packager', function() {
     // Concatenate all files together
     .pipe(concat('h-ide-mappers.js'))
     // Save to dist directory
-    .pipe(gulp.dest(jsDest))
+    .pipe(gulp.dest(jsUnMinDest))
     // Minimize file
     .pipe(rename('h-ide-mappers.min.js'))
     .pipe(uglify())
     // Save to dist directory
-    .pipe(gulp.dest(jsDest));
+    .pipe(gulp.dest(jsMinDest));
 });
 
 gulp.task('ide-mappers-pkg', gulp.series ('ide-mappers-packager'));

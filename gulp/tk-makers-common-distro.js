@@ -6,7 +6,8 @@ var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 
 var makersDir = './h_tk/makers/common/*.js';
-var jsDest = './libs/dist';
+var jsUnMinDest = './libs/h_tk_dist/unmin';
+var jsMinDest = './libs/h_tk_dist/min';
 
 gulp.task('makers-common-packager', function() {
     return gulp.src(makersDir)
@@ -15,10 +16,10 @@ gulp.task('makers-common-packager', function() {
         removeEmptyLines: true
     }))
     .pipe(concat('h-tk-makers-common.js'))
-    .pipe(gulp.dest(jsDest))
+    .pipe(gulp.dest(jsUnMinDest))
     .pipe(rename('h-tk-makers-common.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest(jsDest));
+    .pipe(gulp.dest(jsMinDest));
 });
 
 gulp.task('makers-common-pkg', gulp.series ('makers-common-packager'));

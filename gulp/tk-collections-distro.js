@@ -6,7 +6,8 @@ var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 
 var collectionsDir = './h_tk/collections/*.js';
-var jsDest = './libs/dist';
+var jsUnMinDest = './libs/h_tk_dist/unmin';
+var jsMinDest = './libs/h_tk_dist/min';
 
 gulp.task('collections-packager', function() {
     return gulp.src(collectionsDir)
@@ -15,10 +16,10 @@ gulp.task('collections-packager', function() {
         removeEmptyLines: true
     }))
     .pipe(concat('h-tk-collections.js'))
-    .pipe(gulp.dest(jsDest))
+    .pipe(gulp.dest(jsUnMinDest))
     .pipe(rename('h-tk-collections.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest(jsDest));
+    .pipe(gulp.dest(jsMinDest));
 });
 
 gulp.task('collections-pkg', gulp.series ('collections-packager'));

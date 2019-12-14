@@ -6,7 +6,8 @@ var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 
 var srcDir = './h_tk/layouts/chart/2d/**/*.js';
-var jsDest = './libs/dist';
+var jsUnMinDest = './libs/h_tk_dist/unmin';
+var jsMinDest = './libs/h_tk_dist/min';
 
 gulp.task('charts-2d-packager', function() {
     return gulp.src(srcDir)
@@ -17,12 +18,12 @@ gulp.task('charts-2d-packager', function() {
     // Concatenate all files together
     .pipe(concat('h-tk-charts-2d.js'))
     // Save to dist directory
-    .pipe(gulp.dest(jsDest))
+    .pipe(gulp.dest(jsUnMinDest))
     // Minimize file
     .pipe(rename('h-tk-charts-2d.min.js'))
     .pipe(uglify())
     // Save to dist directory
-    .pipe(gulp.dest(jsDest));
+    .pipe(gulp.dest(jsMinDest));
 });
 
 gulp.task('charts-2d-pkg', gulp.series ('charts-2d-packager'));

@@ -6,7 +6,8 @@ var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 
 var makersDir = './h_tk/makers/3d/*.js';
-var jsDest = './libs/dist';
+var jsUnMinDest = './libs/h_tk_dist/unmin';
+var jsMinDest = './libs/h_tk_dist/min';
 
 gulp.task('makers-3d-packager', function() {
     return gulp.src(makersDir)
@@ -15,10 +16,10 @@ gulp.task('makers-3d-packager', function() {
         removeEmptyLines: true
     }))
     .pipe(concat('h-tk-makers-3d.js'))
-    .pipe(gulp.dest(jsDest))
+    .pipe(gulp.dest(jsUnMinDest))
     .pipe(rename('h-tk-makers-3d.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest(jsDest));
+    .pipe(gulp.dest(jsMinDest));
 });
 
 gulp.task('makers-3d-pkg', gulp.series ('makers-3d-packager'));

@@ -6,7 +6,8 @@ var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 
 var ingestDir = './h_tk/ingest/*.js';
-var jsDest = './libs/dist';
+var jsUnMinDest = './libs/h_tk_dist/unmin';
+var jsMinDest = './libs/h_tk_dist/min';
 
 gulp.task('ingest-packager', function() {
     return gulp.src(ingestDir)
@@ -15,10 +16,10 @@ gulp.task('ingest-packager', function() {
         removeEmptyLines: true
     }))
     .pipe(concat('h-tk-ingest.js'))
-    .pipe(gulp.dest(jsDest))
+    .pipe(gulp.dest(jsUnMinDest))
     .pipe(rename('h-tk-ingest.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest(jsDest));
+    .pipe(gulp.dest(jsMinDest));
 });
 
 gulp.task('ingest-pkg', gulp.series ('ingest-packager'));

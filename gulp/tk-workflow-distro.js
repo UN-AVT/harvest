@@ -6,7 +6,8 @@ var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 
 var workflowDir = './h_tk/workflow/*.js';
-var jsDest = './libs/dist';
+var jsUnMinDest = './libs/h_tk_dist/unmin';
+var jsMinDest = './libs/h_tk_dist/min';
 
 gulp.task('workflow-packager', function() {
     return gulp.src(workflowDir)
@@ -15,10 +16,10 @@ gulp.task('workflow-packager', function() {
         removeEmptyLines: true
     }))
     .pipe(concat('h-tk-workflow.js'))
-    .pipe(gulp.dest(jsDest))
+    .pipe(gulp.dest(jsUnMinDest))
     .pipe(rename('h-tk-workflow.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest(jsDest));
+    .pipe(gulp.dest(jsMinDest));
 });
 
 gulp.task('workflow-pkg', gulp.series ('workflow-packager'));

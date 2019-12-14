@@ -6,7 +6,8 @@ var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 
 var structuresDir = './h_ide/blocks/structures/**/*.js';
-var jsDest = './libs/dist';
+var jsUnMinDest = './libs/h_ide_dist/unmin';
+var jsMinDest = './libs/h_ide_dist/min';
 
 gulp.task('ide-structures-packager', function() {
     return gulp.src(structuresDir)
@@ -17,12 +18,12 @@ gulp.task('ide-structures-packager', function() {
     // Concatenate all files together
     .pipe(concat('h-ide-structures.js'))
     // Save to dist directory
-    .pipe(gulp.dest(jsDest))
+    .pipe(gulp.dest(jsUnMinDest))
     // Minimize file
     .pipe(rename('h-ide-structures.min.js'))
     .pipe(uglify())
     // Save to dist directory
-    .pipe(gulp.dest(jsDest));
+    .pipe(gulp.dest(jsMinDest));
 });
 
 gulp.task('ide-structures-pkg', gulp.series ('ide-structures-packager'));

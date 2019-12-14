@@ -6,7 +6,8 @@ var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 
 var analyticsDir = ['./h_tk/analytics/*.js', '!./h_tk/analytics/entity-extraction.js', '!./h_tk/analytics/nlp.js' ];
-var jsDest = './libs/dist';
+var jsUnMinDest = './libs/h_tk_dist/unmin';
+var jsMinDest = './libs/h_tk_dist/min';
 
 gulp.task('analytics-packager', function() {
     return gulp.src(analyticsDir)
@@ -17,12 +18,12 @@ gulp.task('analytics-packager', function() {
     // Concatenate all files together
     .pipe(concat('h-tk-analytics.js'))
     // Save to dist directory
-    .pipe(gulp.dest(jsDest))
+    .pipe(gulp.dest(jsUnMinDest))
     // Minimize file
     .pipe(rename('h-tk-analytics.min.js'))
     .pipe(uglify())
     // Save to dist directory
-    .pipe(gulp.dest(jsDest));
+    .pipe(gulp.dest(jsMinDest));
 });
 
 gulp.task('analytics-pkg', gulp.series ('analytics-packager'));
