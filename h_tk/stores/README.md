@@ -1,1 +1,0 @@
-## STORES OVERVIEW
