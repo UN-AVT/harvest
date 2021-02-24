@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Hive Examples & API</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link href="../css/examples.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading d-flex justify-content-between align-items-center">
+        <div>Hive Examples</div>
+        <i title="Close Sidebar" class="fa fa-times menu-toggle" id="menu-close"></i>
+      </div>
+      <div class="list-group list-group-flush d-flex" id="sidebar-list-group">
+        <!-- JS-added content here. -->
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+        <i title="Open Sidebar" class="fa fa-plus menu-toggle" id="menu-open"></i>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+              <a class="nav-link" href="../"><i class="fa fa-home mr-1"></i>Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a id='reference-link' class="nav-link" href="#"></i><i class="fa fa-book mr-1"></i>API Reference</a>
+            </li>
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li> -->
+          </ul>
+        </div>
+      </nav>
+
+      <iframe id="content-frame" title="Inline Frame Example" width="100%" height="92.7%" src="reference/manual.html"></iframe>
+      <!--
+      <div class="container-fluid">
+        <h1 class="mt-4">Overview</h1>
+        <p>The starting state of the menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will change.</p>
+        <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>. The top navbar is optional, and just for demonstration. Just create an element with the <code>#menu-toggle</code> ID which will toggle the menu when clicked.</p>
+      </div>
+      -->
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript -->
+  <!-- <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $(".menu-toggle").click(function(e) {
+      if ($(this).attr("id") == 'menu-close') $("#menu-open").show();
+      else $("#menu-open").hide();
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+    $("#reference-link").click(function(e) {
+      $('#content-frame').attr("src", "reference/manual.html")
+    });
+
+    let thumbs = [
+      {img:'band.png',title:'Band', href:'band.html'},
+      {img:'bandWInterpolator.png',title:'Band With Interpolator', href:''},
+      {img:'bar.png',title:'Bar', href:''},
+      {img:'boxplot.png',title:'Boxplot', href:''},
+      {img:'errorbar.png',title:'Errorbar', href:''},
+      {img:'facetgrid.png',title:'Facet Grid', href:''},
+      {img:'facetwrap.png',title:'Facet Wrap', href:''},
+      {img:'graph.png',title:'Force Graphs', href:''},
+      {img:'grouped.png',title:'Grouped', href:''},
+      {img:'groupstack.png',title:'Grouped Stacked', href:''},
+      {img:'hexbin.png',title:'Hexbin', href:''},
+      {img:'hierarchicalRect.png',title:'Hierarchical 1', href:''},
+      {img:'hierarchicalRound.png',title:'Hierarchical 2', href:''},
+      {img:'hybrid.png',title:'SVG Canvas Hybrid', href:''},
+      {img:'hybridRender.png',title:'Hybrid', href:''},
+      {img:'jitter.png',title:'Jitter', href:''},
+      {img:'line.png',title:'Line', href:''},
+      {img:'map.png',title:'Map', href:''},
+      {img:'points.png',title:'Points', href:''},
+      {img:'pubsub.png',title:'Pubsub', href:''},
+      {img:'radial.png',title:'Radial', href:''},
+      {img:'rects.png',title:'Rectangles', href:''},
+      {img:'rotated.png',title:'Rotation', href:''},
+      {img:'stacked.png',title:'Stacked', href:''},
+      {img:'tbar.png',title:'Tbar', href:''},
+      {img:'violin.png',title:'Violin', href:''},
+    ];
+    thumbs.forEach((item, i) => {
+      let html = `
+        <a href="#" class="list-group-item list-group-item-action bg-light" data-href="${item.href}">
+          <div class="text-center">
+            <img class="" width='100%' src="img/${item.img}" alt="">
+            <b>${item.title}</b>
+          </div>
+        </a>
+      `
+      $("#sidebar-list-group").append(html);
+      $("#sidebar-list-group a:last-child").click(function(e) {
+        $('#content-frame').attr("src", $(this).data('href'))
+      });
+    });
+
+
+  </script>
+
+</body>
+
+</html>
