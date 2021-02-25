@@ -49,7 +49,7 @@ function myCodeDownload(filename, idHTML, idJS) {
 
   // create a hidden element and click on it:
   var element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent("<!-- Code from d3-graph-gallery.com -->\n"+myText));
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent("<!-- Code from Harvest Repository -->\n"+myText));
   element.setAttribute('download', filename);
 
   element.style.display = 'none';
