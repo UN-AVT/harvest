@@ -1,0 +1,71 @@
+<h1 class="code-line" data-line-start=0 data-line-end=1 >Harvest GG v0.1 API Reference</h1>
+<p class="has-line-data" data-line-start="2" data-line-end="3">Harvest GG is a comprehensive compatability layer that allows the R-based ggplot2 syntax to be used with the Harvest Interactive Visualization Engine (HIVE). This documentation covers the variations to workflow and syntax from the original ggplot2 syntax.</p>
+<h2 class="code-line" data-line-start=4 data-line-end=5 ><a id="Requirements_4"></a>Requirements:</h2>
+<ul>
+<li class="has-line-data" data-line-start="5" data-line-end="6">Harvest Toolkit</li>
+<li class="has-line-data" data-line-start="6" data-line-end="8">Hive</li>
+</ul>
+<h2 class="code-line" data-line-start=8 data-line-end=9 ><a id="Workflow_8"></a>Workflow</h2>
+<p class="has-line-data" data-line-start="9" data-line-end="11">Create a new instance of the ggplot class and optionally load with global data and aesthetics object.<br>
+Data &amp; Aesthetics mapping can be added directly (or overridden) in the geom call.</p>
+<pre><code class="has-line-data" data-line-start="12" data-line-end="21" class="language-javascript"><span class="hljs-keyword">const</span> aes = {
+    x:<span class="hljs-string">'x_field'</span>,
+    y:<span class="hljs-string">'y_field'</span>,
+}
+
+<span class="hljs-keyword">const</span> data = [] <span class="hljs-comment">// load in with Harvest, D3 or any other javascript method.</span>
+        
+<span class="hljs-keyword">let</span> g = <span class="hljs-keyword">new</span> H.gg(data, aes);
+</code></pre>
+<p class="has-line-data" data-line-start="22" data-line-end="23">Additional ggplot functions can now be called from this instance, including geoms, scales and many more (see ggplot reference). Each function call can be passed an object based set of parameters that follow as closely as possible the structure of parameters from ggplot2 (see <a href="https://ggplot2.tidyverse.org/reference/">ggplot 2 documentation</a>). Each function is processed in order allowing for scales to be changed after each geom call.</p>
+<pre><code class="has-line-data" data-line-start="24" data-line-end="27" class="language-javascript">g.geom_col();
+g.scale_fill_manual();
+</code></pre>
+<p class="has-line-data" data-line-start="28" data-line-end="29">Finally a <code>print</code> call must be made passing the selector of the element to output the visualization to.</p>
+<pre><code class="has-line-data" data-line-start="30" data-line-end="32" class="language-javascript">g.print(<span class="hljs-string">'#my_visualization_div'</span>);
+</code></pre>
+<h3 class="code-line" data-line-start=33 data-line-end=34 ><a id="Rendering_33"></a>Rendering</h3>
+<p class="has-line-data" data-line-start="34" data-line-end="35">During the print call either a selector name or an object with selector name and additional details can be provided. The object must follow the structure below (partial or full) and allow control of sizing, styling &amp; rendering options as used by the Hive Visualization Engine.</p>
+<pre><code class="has-line-data" data-line-start="36" data-line-end="51" class="language-javascript">{
+    renderer:{
+        name:<span class="hljs-string">'svg'</span>
+    },
+    selector:<span class="hljs-string">"#visualization"</span>,
+    exportName:<span class="hljs-string">"visualization"</span>,
+    style: {},
+    attrs: {},
+    sizing:{
+        width: <span class="hljs-number">1200</span>,
+        height: <span class="hljs-number">600</span>,
+        keepAspect: <span class="hljs-literal">false</span>,
+    }
+};
+</code></pre>
+<h2 class="code-line" data-line-start=52 data-line-end=53 ><a id="Syntax_Changes_52"></a>Syntax Changes</h2>
+<h3 class="code-line" data-line-start=53 data-line-end=54 ><a id="Named_Parameters_53"></a>Named Parameters</h3>
+<p class="has-line-data" data-line-start="54" data-line-end="56">Unlike R, all parameters in rHarvest must be named explicitly, which enables parameters to be passed to any function in any order.<br>
+All parameter must be passed as an object, with the name of the key as the parameter name and the value as the value to be used for example:</p>
+<pre><code class="has-line-data" data-line-start="57" data-line-end="60" class="language-javascript"><span class="hljs-keyword">let</span> g = <span class="hljs-keyword">new</span> H.gg(data, aes);
+    g.geom_boxplot({fill:<span class="hljs-string">'pink'</span>, width:<span class="hljs-number">0.5</span>});
+</code></pre>
+<p class="has-line-data" data-line-start="61" data-line-end="62">Some functions in R allow for additional functions to be called. The same result is achieved in rHarvest by passing the name of the function as the key and passing the functions parameters as an object.</p>
+<pre><code class="has-line-data" data-line-start="63" data-line-end="72" class="language-javascript"><span class="hljs-keyword">let</span> g = <span class="hljs-keyword">new</span> H.gg(data, aes);
+    g.geom_label({
+        position:{
+            position_fill:{
+                vjust:<span class="hljs-number">0.5</span>
+            }
+        }
+    }); <span class="hljs-comment">// alternatively  - position:'fill'</span>
+</code></pre>
+<h3 class="code-line" data-line-start=73 data-line-end=74 ><a id="Dot_Model_to_Object_Notation_73"></a>Dot Model to Object Notation</h3>
+<p class="has-line-data" data-line-start="74" data-line-end="75">Some parameter names in R use a <code>.</code> for sub parameters, for instance <code>axis.ticks.x</code>. in rHarvest, this would be written as an object:</p>
+<pre><code class="has-line-data" data-line-start="76" data-line-end="84" class="language-javascript">{
+    axis:{
+        ticks:{
+            x: <span class="hljs-number">5</span>
+        } 
+    }
+}
+</code></pre>
+<p class="has-line-data" data-line-start="84" data-line-end="85">Indentation of the code is not required but can help visualize the sub parameters.</p>
