@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-3523953066677938",
+            enable_page_level_ads: true
+       });
+  </script> -->
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79254642-6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-79254642-6');
+  </script> -->
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Using d3.js to create a very basic area chart">
+  <meta name="keywords" content="Data, Dataviz, Datavisualization, Javascript, JS, d3.js, area chart">
+  <meta name="author" content="Michael Wolf">
+  <link rel="icon" href="../img/logo/D3_single_small.png">
+
+  <meta property="og:title" content="Basic area chart in d3.js">
+  <meta property="og:image" content="https://www.d3-graph-gallery.com/img/logo/D3_full_medium.png">
+  <meta property="og:description" content="Using d3.js to create a very basic area chart">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/coding.css" rel="stylesheet">
+
+  <!-- PRISM -->
+  <script src="../libs/prism.js"></script>
+  <link href="../libs/prism.css" rel="stylesheet" />
+
+  <!-- D3.JS v4 -->
+  <script type="text/javascript" src="../vendor/harvest/libs/h_tk_vendor/d3/d3.js"></script>
+
+  <!-- JQUERY -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+
+  <!-- HTML TO CANVAS -->
+  <script src="../js/html2canvas.js"></script>
+
+  <!-- Function to parse html and js code chunks made by Yan Holtz -->
+  <script src="../js/myParser.js"></script>
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+  <!-- HARVEST TOOLKIT -->
+  <script type="text/javascript" src="../vendor/harvest/h_tk/gg/harvest.js"></script>
+
+  <script type="text/javascript" src="../vendor/harvest/libs/h_tk_vendor/d3/d3.js"></script>
+  <script type="text/javascript" src="../vendor/harvest/libs/h_tk_vendor/sugar.js"></script>
+
+  <script type="text/javascript" src="../vendor/harvest/h_tk/main.js"></script>
+  <script type="text/javascript" src="../vendor/harvest/libs/h_tk_dist/unmin/harvest-core.js"></script>
+  <script type="text/javascript" src="../vendor/harvest/libs/h_tk_dist/unmin/wranglers-format-number.js"></script>
+
+  <script type="text/javascript" src="../vendor/harvest/h_tk/hive/sgs.js"></script>
+  <script type="text/javascript" src="../vendor/harvest/h_tk/hive/guide.js"></script>
+
+  <script type="text/javascript" src="../vendor/harvest/h_tk/output/img-file.js"></script>
+  <script type="text/javascript" src="../vendor/harvest/h_tk/output/defs/exporters.js"></script>
+  <script type="text/javascript" src="../vendor/harvest/h_tk/core/event/pubsub.js"></script>
+  <script src="../libs/popper.js"></script>
+  <script src="../libs/tippy.js"></script>
+  <script type="module" src="../vendor/harvest/h_tk/hive/core.js"></script>
+
+  <!-- GGPLOT FILES -->
+  <script src="../vendor/harvest/h_tk/gg/config/config.js"></script>
+  <script type="text/javascript" src="../vendor/harvest/h_tk/gg/gg.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/libs/ac-colors.min.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/R.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/aesthetics/aesthetics.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/coordinate-systems/coordinate-systems.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/facetting/facet-labels.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/facetting/facet-layouts.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/guides/guides.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/guides/keys.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/layers/annotations/annotations.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/layers/geoms/geoms.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/layers/layers.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/layers/position-adjustment/position-adjustment.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/layers/stats/stats.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/alpha.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/binning.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/colour-brewer.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/colour.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/date-time.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/discrete.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/gradient.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/identity.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/labels.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/limits.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/line-patterns.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/manual.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/position.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/scales.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/shape.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/size.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/steps.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/viridis.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/elements.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/modify.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-bw.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-classic.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-dark.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-gray.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-light.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-linedraw.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-minimal.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-void.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-test.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme.js"></script>
+
+</head>
+
+
+
+
+<body id="page-top">
+
+<!-- ==================== JAVASCRIPT SECTION : EXECUTE THIS CODE AND MAKE IT INTERACTIVE ==================== -->
+<script type='module'>
+// At the beginning, I read the html and JS fragments
+myHtmlParser('code', 'result')
+myJSParser('codejs', 'result')
+
+// If the user change the JS fragment, I run it again:
+document.getElementById('codejs').addEventListener("input", function() {
+d3.select('#result').html("");
+myHtmlParser('code', 'result');
+myJSParser('codejs', 'result');
+})
+
+// If the user change the HTML fragment, I run it again:
+document.getElementById('code').addEventListener("input", function() {
+d3.select('#result').html("");
+myHtmlParser('code', 'result');
+myJSParser('codejs', 'result');
+})
+</script>
+
+
+
+
+<!-- THIS ALLOWS TO INSERT THE MENU THAT IS STORED IN A MENU.HTML FILE-->
+<!-- <nav class="navbar navbar-expand-lg fixed-top" id="mainNav"></nav>
+<script>
+$(function(){
+  $("#mainNav").load("../html_chunk/menu.html");
+});
+</script> -->
+
+<!-- THIS ALLOWS TO INSERT THE MODAL OF THE MENU THAT IS STORED IN A MENU_MODAL.HTML FILE-->
+<!-- <div id="modal_menu_insertion"> </div>
+<script>
+$(function(){
+  $("#modal_menu_insertion").load("../html_chunk/menu_modal.html");
+});
+</script> -->
+
+
+<!-- Header -->
+<header class="masthead">
+  <div class="textlanding">
+      <h1>layering</h1>
+      <hr class="short_hr">
+      <p style="max-width: 700px; margin: auto;">This is a geom layering example.
+        <i title="Download Code" class="fa fa-download" id="menu-close" onclick="myCodeDownload('harvest_example.html', 'code', 'codejs')" style="cursor: pointer;"></i>
+      </p>
+      <br>
+      <!-- <a class="btn btn-secondary btn-md text-uppercase" href="../area.html">Area chart section</a> -->
+      <!-- <button class="btn btn-secondary btn-md text-uppercase" onclick="myCodeDownload('chart_example_from_d3-graph-gallery.html', 'code', 'codejs')">Download code</button> -->
+  </div>
+</header>
+
+
+
+
+<section class="bg" style="padding-top: 20px; padding-bottom: 20px">
+<div class="container" >
+  <div class="row">
+
+<!-- ==================== GRAPH SECTION = WHERE THE GRAPH APPEARS ==================== -->
+
+  <div class="col-lg-5 .align-middle">
+    <div style="position: -webkit-sticky; position: sticky; top: 120px">
+      <div class="bg-light" id="result" ></div>
+      <br>
+      <div>
+        <h5>Steps:</h5>
+        <ul>
+          <br>
+          <li>The Html part of the code just creates a <code>div</code> that will be modified by d3 later on.</li>
+          <br>
+          <li>The first part of the javascript code set a <code>svg</code> area. It specify the chart size and its margin. <a href="">Read more</a>.</li>
+          <br>
+          <!-- <li>This graph shows the evolution of the bitcoin price, see <a href="https://www.data-to-viz.com/story/TwoNumOrdered.html">this post</a> for more info.</li>
+          <br>
+          <li>The area is built appending a <code>path</code> to the plot, and using the <code>d3.area()</code> helper function. See <a href="https://www.d3-graph-gallery.com/graph/shape.html">here</a> to learn more about this kind of function.</li> -->
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<!-- ================================================================================= -->
+
+
+
+
+<!-- ==================== CODE SECTION = WHERE THE CODE APPEARS ==================== -->
+<div class="col-lg-7 text-center .align-middle">
+
+<!-- ========= show html code ============== -->
+<aside style="position: -webkit-sticky; position: sticky; top: 120px">&larr; Edit me! </aside>
+<pre class="language-html"><code id="code" contenteditable="true"><xmp><!DOCTYPE html>
+<meta charset="utf-8">
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+<!-- LAYOUTERS -->
+<script type="text/javascript" src="../vendor/harvest/libs/h_tk_vendor/d3/d3.js"></script>
+
+<!-- RENDERERS -->
+<!-- 2D / 2.5D -->
+<script type="text/javascript" src="/libs/h_tk_vendor/renderers/paper/paper-full.js"></script>
+
+<body style="background-color: #F0F0F0">
+
+<div id='my_view'></div>
+
+<!-- HARVEST TOOLKIT -->
+<script type="text/javascript" src="../vendor/harvest/h_tk/gg/harvest.js"></script>
+
+<!-- Hive TOOLKIT -->
+<script type="text/javascript" src="../vendor/harvest/h_tk/output/img-file.js"></script>
+<script type="text/javascript" src="../vendor/harvest/h_tk/output/defs/exporters.js"></script>
+<script type="text/javascript" src="../vendor/harvest/h_tk/core/event/pubsub.js"></script>
+<script src="../libs/popper.js"></script>
+<script src="../libs/tippy.js"></script>
+<script type="module" src="../vendor/harvest/h_tk/hive/core.js"></script>
+
+<!-- GGPLOT FILES -->
+<script type="text/javascript" src="../vendor/harvest/h_tk/gg/gg.js"></script>
+<div id="visualization" style="height:400px;"></div>
+
+</xmp></code></pre>
+<!-- ==================================== -->
+
+
+
+
+
+
+<!-- ========= show JS code ==============  -->
+<pre class="language-js"><code id="codejs" contenteditable="true"><xmp><script>
+	const data = [
+		{ label: "A", category:'1', value: 10, value2: 5, value3: 15},
+		{ label: "A", category:'2', value: 10, value2: 5, value3: 50},
+		{ label: "B", category:'1', value: 20, value2: 15, value3: 22},
+		{ label: "B", category:'2', value: 50, value2: 40, value3: 52},
+		{ label: "C", category:'1', value: 30, value2: 29, value3: 33},
+		{ label: "C", category:'2', value: 40, value2: 20, value3: 50},
+		{ label: "D", category:'1', value: 40, value2: 34, value3: 56},
+		{ label: "D", category:'2', value: 50, value2: 40, value3: 60},
+		{ label: "E", category:'1', value: 50, value2: 44, value3: 51},
+		{ label: "E", category:'2', value: 50, value2: 40, value3: 60}
+	]
+
+	const filtered = data.filter(d => d.category == '1')
+
+	const aes = {
+		x: {factor:"label"},
+		y: "value",
+	}
+
+		let g = new H.gg(filtered, aes);
+		g.geom_col({color:'blue'});
+		g.geom_point({aes:{y:'value2'}, fill:'red', shape:'triangle'});
+		g.geom_line({aes:{y:'value3'}, color:'orange'});
+		g.geom_errorbar({aes:{ymin:'value2', ymax:'value3'}, color:'pink'});
+		g.theme_dark();
+		g.print('#my_view');
+
+</script></xmp></code></pre>
+<!-- ==================================== -->
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  </div>
+</div>
+</section>
+<br>
+
+
+<!-- ============================ -->
+
+
+
+
+
+
+
+
+<!-- ============================ RELATED BLOCKS ============================ -->
+
+<!-- <section class="bg-light" style="padding-top: 70px; padding-bottom: 70px">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-5 text-center align-self-center">
+        <h3 class="text-uppercase">Related blocks  &rarr;</h3>
+      </div>
+      <div class="col-lg-5">
+        <ul>
+          <li><i>A "simple" D3.js area chart - </i>by <a href="https://www.mattlayman.com/blog/2015/d3js-area-chart/">Matt Layman</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+
+
+
+
+
+
+
+
+<!-- ============================ CONTACT SECTION ============================ -->
+
+  <!-- ANCHOR -->
+  <a name="contactanchor"></a>
+
+
+<section id="contact" class="bg" style="background-color: white"></section>
+
+<!-- THIS ALLOWS TO INSERT THE CONTACT CHUNK THAT IS STORED IN A CONTACT.HTML FILE-->
+<script>
+$(function(){
+  $("#contact").load("../html_chunk/contact.html");
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- ============================ FOOTER SECTION ============================ -->
+<footer class="bg-light" id="myFooter"></footer>
+
+<!-- THIS ALLOWS TO INSERT THE FOOTER THAT IS STORED IN A FOOTER.HTML FILE-->
+<script>
+$(function(){
+  $("#myFooter").load("../html_chunk/footer.html");
+});
+</script>
+
+<!-- ============================ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ============================ JAVASCRIPT SECTION ============================ -->
+
+<!-- Bootstrap core JavaScript -->
+<script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="../js/agency.min.js"></script>
+
+<!-- Activate the bootstrap tooltip, must be after jQuery load -->
+<script>
+  $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
+
+
+<!-- Function to download the content of the div -->
+<script>
+function download(){
+    var a = document.body.appendChild(
+        document.createElement("a")
+    );
+    a.download = "export.html";
+    var command = document.getElementById('code').innerHTML;
+    command = command.replace(/<\/?span[^>]*>/g,"");
+    a.href = "data:html" + command
+    a.click(); // Trigger a click on the element
+}
+</script>
+
+
+
+
+
+
+
+</body>
+
+</html>

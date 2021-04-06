@@ -46,7 +46,7 @@
   <link href="../libs/prism.css" rel="stylesheet" />
 
   <!-- D3.JS v4 -->
-  <script src="../js/d3.v4.js"></script>
+  <script type="text/javascript" src="../vendor/harvest/libs/h_tk_vendor/d3/d3.js"></script>
 
   <!-- JQUERY -->
   <script src="../vendor/jquery/jquery.min.js"></script>
@@ -60,19 +60,73 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
-  <!-- <script type="text/javascript" src="../vendor/harvest/libs/h_tk_vendor/d3/d3.js"></script> -->
+  <!-- HARVEST TOOLKIT -->
+  <script type="text/javascript" src="../vendor/harvest/h_tk/gg/harvest.js"></script>
+
+  <script type="text/javascript" src="../vendor/harvest/libs/h_tk_vendor/d3/d3.js"></script>
   <script type="text/javascript" src="../vendor/harvest/libs/h_tk_vendor/sugar.js"></script>
 
   <script type="text/javascript" src="../vendor/harvest/h_tk/main.js"></script>
   <script type="text/javascript" src="../vendor/harvest/libs/h_tk_dist/unmin/harvest-core.js"></script>
   <script type="text/javascript" src="../vendor/harvest/libs/h_tk_dist/unmin/wranglers-format-number.js"></script>
 
+  <script type="text/javascript" src="../vendor/harvest/h_tk/hive/sgs.js"></script>
+  <script type="text/javascript" src="../vendor/harvest/h_tk/hive/guide.js"></script>
+
   <script type="text/javascript" src="../vendor/harvest/h_tk/output/img-file.js"></script>
   <script type="text/javascript" src="../vendor/harvest/h_tk/output/defs/exporters.js"></script>
   <script type="text/javascript" src="../vendor/harvest/h_tk/core/event/pubsub.js"></script>
   <script src="../libs/popper.js"></script>
   <script src="../libs/tippy.js"></script>
-  <script type="module" src="twod/core.js"></script>
+  <script type="module" src="../vendor/harvest/h_tk/hive/core.js"></script>
+
+  <!-- GGPLOT FILES -->
+  <script src="../vendor/harvest/h_tk/gg/config/config.js"></script>
+  <script type="text/javascript" src="../vendor/harvest/h_tk/gg/gg.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/libs/ac-colors.min.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/R.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/aesthetics/aesthetics.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/coordinate-systems/coordinate-systems.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/facetting/facet-labels.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/facetting/facet-layouts.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/guides/guides.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/guides/keys.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/layers/annotations/annotations.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/layers/geoms/geoms.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/layers/layers.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/layers/position-adjustment/position-adjustment.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/layers/stats/stats.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/alpha.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/binning.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/colour-brewer.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/colour.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/date-time.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/discrete.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/gradient.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/identity.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/labels.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/limits.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/line-patterns.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/manual.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/position.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/scales.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/shape.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/size.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/steps.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/scales/viridis.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/elements.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/modify.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-bw.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-classic.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-dark.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-gray.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-light.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-linedraw.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-minimal.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-void.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme-test.js"></script>
+  <script src="../vendor/harvest/h_tk/gg/themes/theme.js"></script>
+
 </head>
 
 
@@ -124,9 +178,9 @@ $(function(){
 <!-- Header -->
 <header class="masthead">
   <div class="textlanding">
-      <h1>Band Axes</h1>
+      <h1>geom_tile</h1>
       <hr class="short_hr">
-      <p style="max-width: 700px; margin: auto;">This is a simple chart using a band axis.
+      <p style="max-width: 700px; margin: auto;">This is a simple geom_tile example.
         <i title="Download Code" class="fa fa-download" id="menu-close" onclick="myCodeDownload('harvest_example.html', 'code', 'codejs')" style="cursor: pointer;"></i>
       </p>
       <br>
@@ -177,29 +231,34 @@ $(function(){
 <pre class="language-html"><code id="code" contenteditable="true"><xmp><!DOCTYPE html>
 <meta charset="utf-8">
 
-<!-- Load d3.js -->
-<!-- <script src="https://d3js.org/d3.v4.js"></script> -->
-
-<!-- Create a div where the graph will take place -->
-<div id="my_dataviz"></div>
-
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
+<!-- LAYOUTERS -->
 <script type="text/javascript" src="../vendor/harvest/libs/h_tk_vendor/d3/d3.js"></script>
-<script type="text/javascript" src="../vendor/harvest/libs/h_tk_vendor/sugar.js"></script>
 
-<script type="text/javascript" src="../vendor/harvest/h_tk/main.js"></script>
-<script type="text/javascript" src="../vendor/harvest/libs/h_tk_dist/unmin/harvest-core.js"></script>
-<script type="text/javascript" src="../vendor/harvest/libs/h_tk_dist/unmin/wranglers-format-number.js"></script>
+<!-- RENDERERS -->
+<!-- 2D / 2.5D -->
+<script type="text/javascript" src="/libs/h_tk_vendor/renderers/paper/paper-full.js"></script>
 
+<body style="background-color: #F0F0F0">
+
+<div id='my_view'></div>
+
+<!-- HARVEST TOOLKIT -->
+<script type="text/javascript" src="../vendor/harvest/h_tk/gg/harvest.js"></script>
+
+<!-- Hive TOOLKIT -->
 <script type="text/javascript" src="../vendor/harvest/h_tk/output/img-file.js"></script>
 <script type="text/javascript" src="../vendor/harvest/h_tk/output/defs/exporters.js"></script>
 <script type="text/javascript" src="../vendor/harvest/h_tk/core/event/pubsub.js"></script>
 <script src="../libs/popper.js"></script>
 <script src="../libs/tippy.js"></script>
-<script type="module" src="twod/core.js"></script>
+<script type="module" src="../vendor/harvest/h_tk/hive/core.js"></script>
 
+<!-- GGPLOT FILES -->
+<script type="text/javascript" src="../vendor/harvest/h_tk/gg/gg.js"></script>
 <div id="visualization" style="height:400px;"></div>
+
 </xmp></code></pre>
 <!-- ==================================== -->
 
@@ -210,30 +269,23 @@ $(function(){
 
 <!-- ========= show JS code ==============  -->
 <pre class="language-js"><code id="codejs" contenteditable="true"><xmp><script>
-let smData = [{x:'a', y:2}, {x:'b', y:4}, {x:'c', y:6}, {x:'d', y:4}, {x:'e', y:2}];
+	const data = [
+		{ label: "A", category:1, value: 1, value2: 5, value3: 15},
+	]
 
-let cfg = {
-  element:{
-    renderer:{name:'svg'},
-    sizing:{
-      width:400,
-      height:400,
-    }
-  },
-  accessors:{
-    x:{domain:['a','b','c','d','e'], type:'band', range:'width'},
-    y:{domain:[0,6]},
-    color:{field:'x', domain:['a','b','c','d','e'], type:'ordinal', range:['#bada55', '#7fe5f0', '#ff0000', '#ff80ed', '#407294']}
-  },
-  data:[{content:smData}],
-  draw:[
-    {name:'axis', scale:'x', ticks:{stroke:{width:2, color:'orange'}}, dbar:{stroke:{color:'white'}}},
-    {name:'axis', scale:'y', orientation:'left'},
-    {name:'rectangle', color:'color', x:'x', y:'y'}
-  ]
-}
+	const aes = {
+		x: "category",
+		y: "value2",
+		width: "value",
+		height: "value3"
+	}
 
-let c0 = new H.Visualization(cfg);
+		let g = new H.gg(data, aes);
+		g.geom_tile({size:2, color:'blue'})
+		g.xlim([0,11])
+		g.ylim([0,25])
+		g.theme_dark();
+		g.print('#my_view');
 
 </script></xmp></code></pre>
 <!-- ==================================== -->
